@@ -6,6 +6,20 @@ server.use(express.json());
 
 const users = ['Conrado', 'Simone', 'Miguel'];
 
+server.use((req, res, next) =>{
+    console.log(`Metodo: ${req.method}`);
+    console.log(`URL: ${req.url}`);
+    next();
+});
+
+server.use((req, res, next) =>{
+    console.time('Request');
+    
+    next();
+
+    console.timeEnd('Request');
+});
+
 server.get('/users', (req, res) => {
     res.json(users);
 })
